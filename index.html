@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Uma surpresa para você 🎁</title>
+    <title>Escolha seu prêmio 🎁</title>
 
     <style>
         * {
@@ -18,40 +18,45 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
+
             font-family: Arial, Helvetica, sans-serif;
             color: white;
-            overflow: hidden;
 
             background:
-                radial-gradient(circle at 20% 20%, #6c2bd9 0%, transparent 35%),
-                radial-gradient(circle at 80% 80%, #e91e63 0%, transparent 35%),
-                linear-gradient(135deg, #090014, #16002d, #050008);
+                radial-gradient(circle at 15% 20%, rgba(124, 58, 237, .35), transparent 30%),
+                radial-gradient(circle at 85% 80%, rgba(236, 72, 153, .25), transparent 30%),
+                linear-gradient(135deg, #07030d, #140821, #08030e);
+
+            overflow-x: hidden;
         }
 
         /* Brilhos no fundo */
-        .glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
+        .orb {
+            position: fixed;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
-            background: rgba(174, 0, 255, 0.25);
-            filter: blur(80px);
-            animation: float 6s ease-in-out infinite;
+            filter: blur(90px);
+            opacity: .35;
+            pointer-events: none;
+            animation: floating 7s ease-in-out infinite;
         }
 
-        .glow.one {
-            top: -100px;
+        .orb.one {
+            background: #7c3aed;
+            top: -120px;
             left: -100px;
         }
 
-        .glow.two {
-            bottom: -120px;
+        .orb.two {
+            background: #ec4899;
+            bottom: -130px;
             right: -100px;
-            background: rgba(255, 0, 102, 0.25);
             animation-delay: -3s;
         }
 
-        @keyframes float {
+        @keyframes floating {
             0%, 100% {
                 transform: translateY(0);
             }
@@ -61,125 +66,10 @@
             }
         }
 
-        /* Cartão */
-        .card {
-            position: relative;
-            z-index: 2;
-            width: min(90%, 550px);
-            padding: 55px 40px;
-            text-align: center;
-
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.18);
-            border-radius: 28px;
-
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-
-            box-shadow:
-                0 25px 80px rgba(0, 0, 0, 0.55),
-                inset 0 1px rgba(255, 255, 255, 0.15);
-
-            animation: appear 1s ease;
-        }
-
-        @keyframes appear {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .emoji {
-            font-size: 70px;
-            margin-bottom: 20px;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0) rotate(0);
-            }
-
-            50% {
-                transform: translateY(-10px) rotate(5deg);
-            }
-        }
-
-        h1 {
-            font-size: clamp(28px, 6vw, 44px);
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #fff, #ffb7f9, #c78cff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            color: #d8cde5;
-            font-size: 17px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* Botão */
-        .button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-
-            padding: 17px 32px;
-            border-radius: 50px;
-
-            color: white;
-            text-decoration: none;
-            font-size: 17px;
-            font-weight: bold;
-
-            background: linear-gradient(135deg, #ff2d8d, #8b35ff);
-
-            box-shadow:
-                0 10px 30px rgba(180, 40, 255, 0.35);
-
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                filter 0.25s ease;
-        }
-
-        .button:hover {
-            transform: translateY(-4px) scale(1.03);
-            filter: brightness(1.15);
-
-            box-shadow:
-                0 15px 40px rgba(220, 40, 255, 0.5);
-        }
-
-        .button:active {
-            transform: scale(0.97);
-        }
-
-        .youtube {
-            font-size: 22px;
-        }
-
-        .small {
-            margin-top: 25px;
-            margin-bottom: 0;
-            font-size: 12px;
-            color: #8f829e;
-        }
-
-        /* Estrelinhas */
+        /* Estrelas */
         .stars {
-            position: absolute;
+            position: fixed;
             inset: 0;
-            overflow: hidden;
             pointer-events: none;
         }
 
@@ -187,15 +77,50 @@
             position: absolute;
             width: 3px;
             height: 3px;
-            background: white;
             border-radius: 50%;
-            opacity: 0.7;
-            animation: twinkle 3s infinite;
+            background: white;
+            opacity: .5;
+            animation: blink 3s infinite;
         }
 
-        @keyframes twinkle {
+        .star:nth-child(1) {
+            top: 12%;
+            left: 20%;
+        }
+
+        .star:nth-child(2) {
+            top: 25%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .star:nth-child(3) {
+            top: 75%;
+            left: 12%;
+            animation-delay: 2s;
+        }
+
+        .star:nth-child(4) {
+            top: 82%;
+            left: 82%;
+            animation-delay: .5s;
+        }
+
+        .star:nth-child(5) {
+            top: 15%;
+            left: 60%;
+            animation-delay: 1.5s;
+        }
+
+        .star:nth-child(6) {
+            top: 60%;
+            left: 90%;
+            animation-delay: 2.5s;
+        }
+
+        @keyframes blink {
             0%, 100% {
-                opacity: 0.2;
+                opacity: .15;
             }
 
             50% {
@@ -203,43 +128,324 @@
             }
         }
 
-        .star:nth-child(1) {
-            top: 15%;
-            left: 20%;
+        /* Cartão principal */
+        .container {
+            position: relative;
+            z-index: 2;
+
+            width: min(920px, 100%);
+            padding: 50px 35px;
+
+            text-align: center;
+
+            background: rgba(255, 255, 255, .07);
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 30px;
+
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+
+            box-shadow:
+                0 30px 90px rgba(0, 0, 0, .55),
+                inset 0 1px rgba(255, 255, 255, .12);
+
+            animation: entrance .8s ease;
         }
 
-        .star:nth-child(2) {
-            top: 30%;
-            left: 80%;
-            animation-delay: 1s;
+        @keyframes entrance {
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .star:nth-child(3) {
-            top: 70%;
-            left: 15%;
-            animation-delay: 2s;
+        .top-icon {
+            font-size: 58px;
+            margin-bottom: 15px;
+            animation: gift 2.5s ease-in-out infinite;
         }
 
-        .star:nth-child(4) {
-            top: 80%;
-            left: 75%;
-            animation-delay: 0.5s;
+        @keyframes gift {
+            0%, 100% {
+                transform: rotate(0deg) translateY(0);
+            }
+
+            50% {
+                transform: rotate(4deg) translateY(-7px);
+            }
         }
 
-        .star:nth-child(5) {
-            top: 10%;
-            left: 60%;
-            animation-delay: 1.5s;
+        h1 {
+            font-size: clamp(30px, 5vw, 48px);
+            margin-bottom: 14px;
+
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #e9d5ff,
+                #f9a8d4
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: #cfc5d9;
+            font-size: 17px;
+            line-height: 1.6;
+            max-width: 580px;
+            margin: 0 auto 40px;
+        }
+
+        /* Opções */
+        .options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+            max-width: 720px;
+            margin: auto;
+        }
+
+        .option {
+            position: relative;
+            padding: 35px 25px;
+
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, .14);
+
+            background: rgba(255, 255, 255, .06);
+
+            color: white;
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                transform .3s ease,
+                border-color .3s ease,
+                background .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .option:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, .10);
+            border-color: rgba(255, 255, 255, .3);
+
+            box-shadow:
+                0 20px 50px rgba(0, 0, 0, .3);
+        }
+
+        .option:active {
+            transform: translateY(-3px) scale(.98);
+        }
+
+        .option-icon {
+            font-size: 55px;
+            margin-bottom: 18px;
+        }
+
+        .option h2 {
+            font-size: 23px;
+            margin-bottom: 10px;
+        }
+
+        .option p {
+            color: #aaa0b6;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* Opção do presente */
+        .mystery {
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(139, 53, 255, .15),
+                    rgba(236, 72, 153, .10)
+                );
+        }
+
+        .mystery:hover {
+            border-color: rgba(190, 120, 255, .65);
+
+            box-shadow:
+                0 20px 60px rgba(139, 53, 255, .20);
+        }
+
+        .tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: .5px;
+
+            background: linear-gradient(
+                135deg,
+                #8b35ff,
+                #ec4899
+            );
+        }
+
+        .footer {
+            margin-top: 32px;
+            color: #766b82;
+            font-size: 12px;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            inset: 0;
+
+            display: none;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background: rgba(0, 0, 0, .72);
+            backdrop-filter: blur(10px);
+
+            z-index: 10;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-box {
+            width: min(440px, 100%);
+            padding: 40px 30px;
+
+            text-align: center;
+
+            background: #171020;
+            border: 1px solid rgba(255, 255, 255, .15);
+            border-radius: 25px;
+
+            box-shadow:
+                0 30px 100px rgba(0, 0, 0, .7);
+
+            animation: modalIn .35s ease;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .modal-icon {
+            font-size: 65px;
+            margin-bottom: 15px;
+        }
+
+        .modal h2 {
+            font-size: 27px;
+            margin-bottom: 12px;
+        }
+
+        .modal p {
+            color: #b9adbf;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .confirm {
+            display: inline-block;
+
+            padding: 15px 28px;
+
+            border-radius: 50px;
+
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+
+            background: linear-gradient(
+                135deg,
+                #8b35ff,
+                #ec4899
+            );
+
+            box-shadow:
+                0 10px 30px rgba(139, 53, 255, .3);
+
+            transition: .25s;
+        }
+
+        .confirm:hover {
+            transform: translateY(-3px);
+            filter: brightness(1.15);
+        }
+
+        .cancel {
+            display: block;
+            margin: 17px auto 0;
+
+            background: none;
+            border: none;
+
+            color: #81758b;
+            cursor: pointer;
+
+            font-size: 14px;
+        }
+
+        .cancel:hover {
+            color: white;
+        }
+
+        /* Celular */
+        @media (max-width: 650px) {
+
+            .container {
+                padding: 40px 20px;
+            }
+
+            .options {
+                grid-template-columns: 1fr;
+            }
+
+            .option {
+                padding: 28px 20px;
+            }
+
+            .subtitle {
+                font-size: 15px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="glow one"></div>
-    <div class="glow two"></div>
+    <!-- Brilhos -->
+    <div class="orb one"></div>
+    <div class="orb two"></div>
 
+    <!-- Estrelas -->
     <div class="stars">
+        <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
         <div class="star"></div>
@@ -247,33 +453,169 @@
         <div class="star"></div>
     </div>
 
-    <main class="card">
+    <!-- Conteúdo principal -->
+    <main class="container">
 
-        <div class="emoji">🎁</div>
+        <div class="top-icon">🎁</div>
 
-        <h1>Tenho uma surpresa para você!</h1>
+        <h1>Escolha seu prêmio</h1>
 
-        <p>
-            Prepare seus fones e aumente o volume... 
-            <br>
-            tem uma música esperando por você. 🎶
+        <p class="subtitle">
+            Você tem duas opções disponíveis.
+            Escolha com cuidado... uma delas pode esconder
+            uma surpresa especial. ✨
         </p>
 
-        <a
-            class="button"
-            href="https://www.youtube.com/watch?v=nIq4z2fnzFU"
-            target="_blank"
-            rel="noopener noreferrer"
-        >
-            <span class="youtube">▶</span>
-            Ouvir a música
-        </a>
+        <div class="options">
 
-        <p class="small">
-            Clique no botão para descobrir a surpresa ✨
-        </p>
+            <!-- R$ 2,00 -->
+            <div
+                class="option"
+                onclick="twoReais()"
+            >
+
+                <div class="option-icon">💵</div>
+
+                <h2>R$ 2,00</h2>
+
+                <p>
+                    Uma escolha simples,
+                    rápida e garantida.
+                </p>
+
+            </div>
+
+            <!-- Presente misterioso -->
+            <div
+                class="option mystery"
+                onclick="openMystery()"
+            >
+
+                <div class="tag">
+                    MISTERIOSO
+                </div>
+
+                <div class="option-icon">🎁</div>
+
+                <h2>Presente misterioso</h2>
+
+                <p>
+                    Ninguém sabe o que está dentro.
+                    Só existe uma maneira de descobrir...
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="footer">
+            ✨ Faça sua escolha e descubra o que prepararam para você.
+        </div>
 
     </main>
+
+
+    <!-- Modal do presente -->
+    <div
+        class="modal"
+        id="mysteryModal"
+    >
+
+        <div class="modal-box">
+
+            <div class="modal-icon">
+                🎁
+            </div>
+
+            <h2>Tem certeza?</h2>
+
+            <p>
+                Você escolheu o presente misterioso.
+                <br><br>
+                Depois de abrir, não tem como voltar atrás. 👀
+            </p>
+
+            <a
+                class="confirm"
+                href="https://www.youtube.com/watch?v=nIq4z2fnzFU"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                🎁 Abrir meu presente
+            </a>
+
+            <button
+                class="cancel"
+                onclick="closeMystery()"
+            >
+                Voltar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /*
+         * OPÇÃO R$ 2,00
+         * Abre o arquivo do Google Drive
+         */
+
+        function twoReais() {
+
+            window.open(
+                "https://cdn.qwenlm.ai/output/wV11g6a95da164ce364a80015ed410044/image_edit/c810eea4-d078-45c6-855b-d99a10b5f1d5/1788285989.png?key=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyZXNvdXJjZV91c2VyX2lkIjoid1YxMWc2YTk1ZGExNjRjZTM2NGE4MDAxNWVkNDEwMDQ0IiwicmVzb3VyY2VfaWQiOiIxNzg4Mjg1OTg5IiwicmVzb3VyY2VfY2hhdF9pZCI6Ijc3YzFlODNhLWFiMDgtNDZlMi1hMDc3LTc1MTliM2I2NzhlZSJ9.FpfnhjWSxON7qXXpI32HjAKQvIvT4TkMNlJuPzqBzH8",
+                "_blank"
+            );
+
+        }
+
+
+        /*
+         * ABRIR PRESENTE MISTERIOSO
+         */
+
+        function openMystery() {
+
+            document
+                .getElementById("mysteryModal")
+                .classList.add("active");
+
+        }
+
+
+        /*
+         * FECHAR MODAL
+         */
+
+        function closeMystery() {
+
+            document
+                .getElementById("mysteryModal")
+                .classList.remove("active");
+
+        }
+
+
+        /*
+         * Fechar o modal clicando fora dele
+         */
+
+        document
+            .getElementById("mysteryModal")
+            .addEventListener("click", function(event) {
+
+                if (event.target === this) {
+
+                    closeMystery();
+
+                }
+
+            });
+
+    </script>
 
 </body>
 </html>
